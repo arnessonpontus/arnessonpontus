@@ -2,7 +2,7 @@ require('dotenv').config();
 
 module.exports = {
   siteMetadata: {
-    title: `Gatsby TypeScript + Contentful Starter`,
+    title: `Pontus Arnesson`,
     description: `Gatsby blog starter with Contentful and typescript integration, extension of the original Gatsby-Contentful-typescript starter.`,
     author: `Pontus Arnesson`,
   },
@@ -42,6 +42,12 @@ module.exports = {
       resolve: `gatsby-plugin-graphql-codegen`,
       options: {
         fileName: `types/graphql-types.d.ts`,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-anchor-links',
+      options: {
+        offset: -90,
       },
     },
     /* eslint-enable @typescript-eslint/camelcase */
