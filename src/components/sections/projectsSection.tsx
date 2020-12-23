@@ -1,19 +1,25 @@
 import * as React from 'react';
-import { Link } from 'gatsby';
-import Image from '../image';
 import { Theme } from '@material-ui/core/styles';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    backgroundColor: '#87A8B9',
     minHeight: '90vh',
+    textAlign: 'center',
   },
-  imageWrapper: {
-    maxWidth: `300px`,
-    marginBottom: `1.45rem`,
+  paper: {
+    height: 140,
+    width: 140,
+    borderRadius: '50%',
+    transition: 'transform 0.15s ease-in-out',
+    cursor: 'pointer',
+    '&:hover': {
+      transform: 'scale3d(1.1, 1.1, 1)',
+    },
   },
 }));
 
@@ -21,27 +27,27 @@ const ProjectsSection: React.FC = () => {
   const classes = useStyles();
 
   return (
-    <div className={classes.root} id="projects">
-      <Typography variant="h3">Hi people</Typography>
-      <Typography variant="body1">Welcome to your new Gatsby site</Typography>
+    <Grid
+      container
+      className={classes.root}
+      spacing={10}
+      id="projects"
+      justify="center"
+      alignItems="center"
+      direction="column"
+    >
+      <Grid item xs={12}>
+        <Typography variant="h3">Projects</Typography>
+      </Grid>
 
-      <div className={classes.imageWrapper}>
-        <Image />
-      </div>
-      <ul>
-        <li>
-          <Link to="/page-2/">Go to page 2</Link>
-        </li>
-        <li>
-          <Link to="/blogPosts/">Go to blog posts (Source: Contentful)</Link>
-        </li>
-      </ul>
-      <Typography variant="body1">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam numquam
-        aspernatur impedit unde quo ipsum repellendus vitae non libero nisi
-        mollitia neque quia, quidem cum debitis animi amet natus! Atque?
-      </Typography>
-    </div>
+      <Grid container justify="center" spacing={2}>
+        {[0, 1, 2].map((value) => (
+          <Grid key={value} item>
+            <Paper elevation={10} className={classes.paper} />
+          </Grid>
+        ))}
+      </Grid>
+    </Grid>
   );
 };
 

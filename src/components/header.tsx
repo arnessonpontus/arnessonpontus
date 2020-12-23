@@ -44,6 +44,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: `white`,
     textDecoration: `none`,
   },
+  link: {
+    color: `black`,
+    textDecoration: `none`,
+  },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
     marginRight: drawerWidth,
@@ -68,21 +72,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: '0 0px',
     ...theme.mixins.toolbar,
     justifyContent: 'flex-end',
-  },
-  content: {
-    padding: theme.spacing(3),
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    marginRight: -drawerWidth,
-  },
-  contentShift: {
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    marginRight: 0,
   },
   menuIcon: {
     fontSize: '1.5em',
@@ -149,7 +138,7 @@ const Header = ({ siteTitle }: Props) => {
         </div>
         <Divider />
         <List>
-          <AnchorLink to="/#welcome">
+          <AnchorLink className={classes.link} to="/#welcome">
             <ListItem button>
               <ListItemIcon>
                 <HomeIcon />
@@ -157,7 +146,7 @@ const Header = ({ siteTitle }: Props) => {
               <ListItemText>Welcome</ListItemText>
             </ListItem>
           </AnchorLink>
-          <AnchorLink to="/#about">
+          <AnchorLink className={classes.link} to="/#about">
             <ListItem button>
               <ListItemIcon>
                 <ListIcon />
@@ -165,7 +154,7 @@ const Header = ({ siteTitle }: Props) => {
               <ListItemText>About me</ListItemText>
             </ListItem>
           </AnchorLink>
-          <AnchorLink to="/#projects">
+          <AnchorLink className={classes.link} to="/#projects">
             <ListItem button>
               <ListItemIcon>
                 <ListIcon />

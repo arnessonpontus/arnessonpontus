@@ -48,6 +48,7 @@ module.exports = {
       resolve: 'gatsby-plugin-anchor-links',
       options: {
         offset: -90,
+        duration: 500,
       },
     },
     /* eslint-enable @typescript-eslint/camelcase */

@@ -12,6 +12,9 @@ import { useStaticQuery, graphql } from 'gatsby';
 import Header from './header';
 import './layout.css';
 
+import { ThemeProvider } from '@material-ui/core/styles';
+import { theme } from '../theme';
+
 type Props = {
   children: React.ReactNode;
 };
@@ -29,16 +32,17 @@ const Layout: React.FC<Props> = ({ children }: Props) => {
 
   return (
     <>
-      <Header siteTitle={data.site.siteMetadata.title} />
-      <div
-        style={{
-          margin: `0 auto`,
-          paddingTop: 100,
-        }}
-      >
-        <main>{children}</main>
-        <footer>©{new Date().getFullYear()} Pontus Arnesson</footer>
-      </div>
+      <ThemeProvider theme={theme}>
+        <Header siteTitle={data.site.siteMetadata.title} />
+        <div
+          style={{
+            margin: `0 auto`,
+            paddingTop: '10vh',
+          }}
+        >
+          <main>{children}</main>
+        </div>
+      </ThemeProvider>
     </>
   );
 };
