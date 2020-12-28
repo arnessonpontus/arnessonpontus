@@ -2,28 +2,25 @@ import * as React from 'react';
 import Image from '../image';
 
 import { Theme } from '@material-ui/core/styles';
-
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
+
+import Bubble from '../bubble';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     minHeight: '90vh',
     textAlign: 'center',
   },
-  imageWrapper: {
-    width: `250px`,
-    marginBottom: `1.45rem`,
-  },
-  image: {
-    borderRadius: '50%',
-    overflow: 'hidden',
-  },
 }));
 
 const WelcomeSection: React.FC = () => {
   const classes = useStyles();
+
+  function handleOnClick() {
+    console.log('welcome section');
+  }
 
   return (
     <Grid
@@ -35,10 +32,10 @@ const WelcomeSection: React.FC = () => {
       alignItems="center"
       direction="column"
     >
-      <Grid item className={classes.imageWrapper}>
-        <div className={classes.image}>
+      <Grid item>
+        <Bubble width={250} height={250} onClicked={handleOnClick}>
           <Image />
-        </div>
+        </Bubble>
       </Grid>
       <Grid item xs={12}>
         <Typography variant="h3">Hi people</Typography>

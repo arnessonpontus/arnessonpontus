@@ -4,27 +4,22 @@ import { Theme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
+import Bubble from '../bubble';
+import Image from '../image';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     minHeight: '90vh',
     textAlign: 'center',
   },
-  paper: {
-    height: 140,
-    width: 140,
-    borderRadius: '50%',
-    transition: 'transform 0.15s ease-in-out',
-    cursor: 'pointer',
-    '&:hover': {
-      transform: 'scale3d(1.1, 1.1, 1)',
-    },
-  },
 }));
 
 const ProjectsSection: React.FC = () => {
   const classes = useStyles();
+
+  function handleOnClick(i: number) {
+    console.log('project ' + i);
+  }
 
   return (
     <Grid
@@ -41,9 +36,11 @@ const ProjectsSection: React.FC = () => {
       </Grid>
 
       <Grid container justify="center" spacing={2}>
-        {[0, 1, 2].map((value) => (
+        {[0, 1, 2].map((value, i) => (
           <Grid key={value} item>
-            <Paper elevation={10} className={classes.paper} />
+            <Bubble onClicked={() => handleOnClick(i)} width={200} height={200}>
+              <Image></Image>
+            </Bubble>
           </Grid>
         ))}
       </Grid>
