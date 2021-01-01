@@ -2,12 +2,12 @@ const path = require(`path`);
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
-  const BlogPostTemplate = path.resolve(`src/templates/Project.tsx`);
+  const ProjectItemTemplate = path.resolve(`src/templates/Project.tsx`);
 
   return graphql(
     `
       query {
-        allContentfulBlogPost {
+        allContentfulProjectItem {
           edges {
             node {
               id
@@ -24,11 +24,11 @@ exports.createPages = ({ graphql, actions }) => {
     }
 
     // Create blog post pages.
-    result.data.allContentfulBlogPost.edges.forEach((edge) => {
+    result.data.allContentfulProjectItem.edges.forEach((edge) => {
       createPage({
         // Path for this page — required
         path: `${edge.node.slug}`,
-        component: BlogPostTemplate,
+        component: ProjectItemTemplate,
         context: {
           id: edge.node.id,
           slug: edge.node.slug,

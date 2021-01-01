@@ -5,7 +5,7 @@ import Img, { FluidObject } from 'gatsby-image';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import ContentfulRichText from '../components/contentfulRichText';
-import { ContentfulBlogPost } from '../../types/graphql-types'; // eslint-disable-line import/no-unresolved
+import { ContentfulProjectItem } from '../../types/graphql-types'; // eslint-disable-line import/no-unresolved
 
 import { makeStyles } from '@material-ui/core/styles';
 import { Theme } from '@material-ui/core/styles';
@@ -21,43 +21,51 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 interface Props {
   data: {
-    contentfulBlogPost: ContentfulBlogPost;
+    contentfulProjectItem: ContentfulProjectItem;
   };
 }
 
-const BlogPostTemplate = (props: Props) => {
+const ProjectTemplate = (props: Props) => {
   const classes = useStyles();
-  const post: ContentfulBlogPost = props.data.contentfulBlogPost;
+  const project = props.data.contentfulProjectItem;
   return (
     <Layout>
       <div className={classes.root}>
         <SEO title={'title'} />
-        <h2>{post.title}</h2>
+        <h2>{project.title}</h2>
         <ContentfulRichText
-          document={post.body?.json}
-          key={`${post.id}-content`}
+          document={project.description?.json}
+          key={`${project.id}-content`}
         />
-        {post.images ? (
-          <Img fluid={post.images[0]?.fluid as FluidObject} alt={post.title!} />
+        {project.images ? (
+          <Img
+            fluid={project.images[0]?.fluid as FluidObject}
+            alt={project.title!}
+          />
+        ) : null}
+        {project.videolink ? (
+          <a href={project.videolink}>link to video</a>
         ) : null}
       </div>
     </Layout>
   );
 };
 
-export default BlogPostTemplate;
+export default ProjectTemplate;
 
 export const pageQuery = graphql`
-  query BlogPostBySlug($slug: String!) {
+  query ProjectBySlug($slug: String!) {
     site {
       siteMetadata {
         title
       }
     }
-    contentfulBlogPost(slug: { eq: $slug }) {
+    contentfulProjectItem(slug: { eq: $slug }) {
       title
       id
-      body {
+      subTitle
+      videolink
+      description {
         json
       }
       images {

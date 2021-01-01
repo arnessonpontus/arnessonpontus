@@ -7,10 +7,10 @@ import Grid from '@material-ui/core/Grid';
 import Bubble from '../bubble';
 import Image from '../image';
 import { useStaticQuery, graphql, Link } from 'gatsby';
-import { BlogPagesQueryQuery } from '../../../types/graphql-types'; // eslint-disable-line import/no-unresolved
+import { ContentfulProjectItem } from '../../../types/graphql-types'; // eslint-disable-line import/no-unresolved
 
-interface post {
-  item: BlogPagesQueryQuery;
+interface Project {
+  node: ContentfulProjectItem;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -31,9 +31,9 @@ const ProjectsSection: React.FC = () => {
     console.log('project ' + text);
   }
 
-  const posts = useStaticQuery(graphql`
-    query BlogPagesQuery {
-      allContentfulBlogPost(limit: 10) {
+  const projects = useStaticQuery(graphql`
+    query ProjectSectionQuery {
+      allContentfulProjectItem(limit: 10) {
         edges {
           node {
             id
@@ -47,14 +47,14 @@ const ProjectsSection: React.FC = () => {
                 url
               }
             }
-            body {
+            description {
               json
             }
           }
         }
       }
     }
-  `).allContentfulBlogPost.edges;
+  `).allContentfulProjectItem.edges;
 
   return (
     <Grid
@@ -71,17 +71,17 @@ const ProjectsSection: React.FC = () => {
       </Grid>
 
       <Grid container item xs={12} justify="center" spacing={6}>
-        {posts.map((post: any, i: number) => (
+        {projects.map((project: Project, i: number) => (
           <Grid key={i} item>
-            <Link className={classes.link} to={post.node.slug || '/'}>
+            <Link className={classes.link} to={project.node.slug || '/'}>
               <Bubble
-                onClicked={() => handleOnClick(post.node.slug)}
+                onClicked={() => handleOnClick(i.toString())}
                 width={200}
                 height={200}
               >
                 <Image></Image>
               </Bubble>
-              <p>{post.node.title}</p>
+              <p>{project.node.title}</p>
             </Link>
           </Grid>
         ))}
