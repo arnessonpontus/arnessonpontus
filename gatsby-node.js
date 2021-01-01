@@ -2,7 +2,7 @@ const path = require(`path`);
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
-  const BlogPostTemplate = path.resolve(`src/templates/BlogPost.tsx`);
+  const BlogPostTemplate = path.resolve(`src/templates/Project.tsx`);
 
   return graphql(
     `
@@ -27,7 +27,7 @@ exports.createPages = ({ graphql, actions }) => {
     result.data.allContentfulBlogPost.edges.forEach((edge) => {
       createPage({
         // Path for this page — required
-        path: `blogPosts/${edge.node.slug}`,
+        path: `${edge.node.slug}`,
         component: BlogPostTemplate,
         context: {
           id: edge.node.id,

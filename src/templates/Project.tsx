@@ -7,6 +7,18 @@ import SEO from '../components/seo';
 import ContentfulRichText from '../components/contentfulRichText';
 import { ContentfulBlogPost } from '../../types/graphql-types'; // eslint-disable-line import/no-unresolved
 
+import { makeStyles } from '@material-ui/core/styles';
+import { Theme } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    background: '#0F2635',
+    paddingLeft: '10vw',
+    paddingRight: '10vw',
+    minHeight: '90vh',
+  },
+}));
+
 interface Props {
   data: {
     contentfulBlogPost: ContentfulBlogPost;
@@ -14,18 +26,21 @@ interface Props {
 }
 
 const BlogPostTemplate = (props: Props) => {
+  const classes = useStyles();
   const post: ContentfulBlogPost = props.data.contentfulBlogPost;
   return (
     <Layout>
-      <SEO title={'title'} />
-      <h2>{post.title}</h2>
-      <ContentfulRichText
-        document={post.body?.json}
-        key={`${post.id}-content`}
-      />
-      {post.images ? (
-        <Img fluid={post.images[0]?.fluid as FluidObject} alt={post.title!} />
-      ) : null}
+      <div className={classes.root}>
+        <SEO title={'title'} />
+        <h2>{post.title}</h2>
+        <ContentfulRichText
+          document={post.body?.json}
+          key={`${post.id}-content`}
+        />
+        {post.images ? (
+          <Img fluid={post.images[0]?.fluid as FluidObject} alt={post.title!} />
+        ) : null}
+      </div>
     </Layout>
   );
 };

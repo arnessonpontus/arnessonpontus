@@ -21,6 +21,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import HomeIcon from '@material-ui/icons/Home';
 import ListIcon from '@material-ui/icons/ViewList';
+import InfoIcon from '@material-ui/icons/Info';
 
 const drawerWidth = 240;
 
@@ -149,7 +150,7 @@ const Header = ({ siteTitle }: Props) => {
           <AnchorLink className={classes.link} to="/#about">
             <ListItem button>
               <ListItemIcon>
-                <ListIcon />
+                <InfoIcon />
               </ListItemIcon>
               <ListItemText>About me</ListItemText>
             </ListItem>

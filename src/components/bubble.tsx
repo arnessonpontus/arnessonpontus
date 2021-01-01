@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Theme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
 
@@ -14,8 +13,6 @@ const useStyles = makeStyles({
   bubbleBorder: (props: Props) => ({
     width: props.width,
     height: props.height,
-
-    //backgroundColor: 'red',
     borderWidth: '4px',
     borderColor: 'white',
     borderStyle: 'solid',
