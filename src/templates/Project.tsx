@@ -17,6 +17,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingRight: '10vw',
     minHeight: '90vh',
   },
+  link: {
+    color: `white`,
+    textDecoration: `none`,
+  },
+  imageWrapper: {
+    width: 300,
+  },
 }));
 
 interface Props {
@@ -33,18 +40,31 @@ const ProjectTemplate = (props: Props) => {
       <div className={classes.root}>
         <SEO title={'title'} />
         <h2>{project.title}</h2>
+        <h5>{project.subTitle}</h5>
         <ContentfulRichText
           document={project.description?.json}
           key={`${project.id}-content`}
         />
-        {project.images ? (
-          <Img
-            fluid={project.images[0]?.fluid as FluidObject}
-            alt={project.title!}
-          />
+        {project.images?.map((img) => {
+          return (
+            <div className={classes.imageWrapper}>
+              <Img
+                key={img?.id}
+                fluid={img?.fluid as FluidObject}
+                alt={project.title!}
+              />
+            </div>
+          );
+        })}
+        {project.videoLink ? (
+          <a className={classes.link} href={project.videoLink}>
+            link to video
+          </a>
         ) : null}
-        {project.videolink ? (
-          <a href={project.videolink}>link to video</a>
+        {project.githubLink ? (
+          <a className={classes.link} href={project.githubLink}>
+            link to github
+          </a>
         ) : null}
       </div>
     </Layout>
@@ -64,7 +84,15 @@ export const pageQuery = graphql`
       title
       id
       subTitle
-      videolink
+      videoLink
+      githubLink
+      report {
+        title
+        file {
+          url
+        }
+      }
+      keywords
       description {
         json
       }

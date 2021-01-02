@@ -5,7 +5,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Bubble from '../bubble';
-import Image from '../image';
+import Img, { FluidObject } from 'gatsby-image';
+
 import { useStaticQuery, graphql, Link } from 'gatsby';
 import { ContentfulProjectItem } from '../../../types/graphql-types'; // eslint-disable-line import/no-unresolved
 
@@ -40,11 +41,11 @@ const ProjectsSection: React.FC = () => {
             title
             updatedAt
             slug
-            images {
+            thumbnail {
               title
               description
-              file {
-                url
+              fluid(maxWidth: 150) {
+                ...GatsbyContentfulFluid
               }
             }
             description {
@@ -79,7 +80,13 @@ const ProjectsSection: React.FC = () => {
                 width={200}
                 height={200}
               >
-                <Image></Image>
+                <Img
+                  fluid={{
+                    ...(project.node.thumbnail?.fluid as FluidObject),
+                    aspectRatio: 1 / 1,
+                  }}
+                  alt={project.node.title!}
+                />
               </Bubble>
               <p>{project.node.title}</p>
             </Link>

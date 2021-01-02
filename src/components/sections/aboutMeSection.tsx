@@ -62,8 +62,8 @@ const AboutMeSection: React.FC = () => {
               </Link>
             </ListItem>
             <ListItem>
-              <Link className={classes.link} to="/blogPosts/">
-                Go to blog posts (Source: Contentful)
+              <Link className={classes.link} to="/">
+                Go to Home (Source: Contentful)
               </Link>
             </ListItem>
           </List>
