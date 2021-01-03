@@ -11,7 +11,8 @@ import { Theme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    background: 'linear-gradient(#87A8B7 0%, #0F2635 100%)',
+    background:
+      'linear-gradient(#87a8b9 0%, #215d7a 33%, #063247 66%, #0f2635 100%)',
     paddingLeft: '10vw',
     paddingRight: '10vw',
   },

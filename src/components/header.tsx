@@ -140,7 +140,7 @@ const Header = ({ siteTitle }: Props) => {
         <Divider />
         <List>
           <AnchorLink className={classes.link} to="/#welcome">
-            <ListItem button>
+            <ListItem button onClick={handleDrawerClose}>
               <ListItemIcon>
                 <HomeIcon />
               </ListItemIcon>
@@ -148,7 +148,7 @@ const Header = ({ siteTitle }: Props) => {
             </ListItem>
           </AnchorLink>
           <AnchorLink className={classes.link} to="/#about">
-            <ListItem button>
+            <ListItem button onClick={handleDrawerClose}>
               <ListItemIcon>
                 <InfoIcon />
               </ListItemIcon>
@@ -156,7 +156,7 @@ const Header = ({ siteTitle }: Props) => {
             </ListItem>
           </AnchorLink>
           <AnchorLink className={classes.link} to="/#projects">
-            <ListItem button>
+            <ListItem button onClick={handleDrawerClose}>
               <ListItemIcon>
                 <ListIcon />
               </ListItemIcon>

@@ -47,12 +47,8 @@ const ProjectTemplate = (props: Props) => {
         />
         {project.images?.map((img) => {
           return (
-            <div className={classes.imageWrapper}>
-              <Img
-                key={img?.id}
-                fluid={img?.fluid as FluidObject}
-                alt={project.title!}
-              />
+            <div key={img?.id} className={classes.imageWrapper}>
+              <Img fluid={img?.fluid as FluidObject} alt={project.title!} />
             </div>
           );
         })}

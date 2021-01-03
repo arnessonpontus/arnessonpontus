@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     minHeight: '90vh',
     textAlign: 'center',
+    marginTop: '10vh',
   },
   imageWrapper: {
     width: `250px`,
@@ -48,31 +49,18 @@ const AboutMeSection: React.FC = () => {
           </div>
         </Grid>
         <Grid item xs={12}>
-          <Typography variant="h3">About me</Typography>
-          <Typography variant="body1">
-            Welcome to your new Gatsby site
-          </Typography>
+          <Typography variant="h3">About Me</Typography>
         </Grid>
 
-        <Grid item container xs={12} justify="center">
-          <List>
-            <ListItem>
-              <Link className={classes.link} to="/page-2/">
-                Go to page 2
-              </Link>
-            </ListItem>
-            <ListItem>
-              <Link className={classes.link} to="/">
-                Go to Home (Source: Contentful)
-              </Link>
-            </ListItem>
-          </List>
-        </Grid>
         <Grid item xs={12}>
           <Typography variant="body1">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam numquam
-            aspernatur impedit unde quo ipsum repellendus vitae non libero nisi
-            mollitia neque quia, quidem cum debitis animi amet natus! Atque?
+            I am currently studying my last year at M.Sc. in Media Technology at
+            Linköping University. I am interested in several different areas
+            including Machine Learning, Computer vision, Computer graphics, Web,
+            Mobile Applications etc. I like to live an active lifestyle and move
+            my body including playing sports, going to the gym and running in
+            the nature. I also enjoy hobby programming projects, spending time
+            with friends and family or just relaxing with a series of film.
           </Typography>
         </Grid>
       </Grid>

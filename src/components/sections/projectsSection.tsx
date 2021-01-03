@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     minHeight: '90vh',
     textAlign: 'center',
+    marginTop: '10vh',
   },
   link: {
     color: `white`,
@@ -61,7 +62,7 @@ const ProjectsSection: React.FC = () => {
     <Grid
       container
       className={classes.root}
-      spacing={2}
+      spacing={6}
       id="projects"
       justify="center"
       alignItems="center"
@@ -71,7 +72,7 @@ const ProjectsSection: React.FC = () => {
         <Typography variant="h3">Projects</Typography>
       </Grid>
 
-      <Grid container item xs={12} justify="center" spacing={6}>
+      <Grid container item xs={12} justify="center" spacing={2}>
         {projects.map((project: Project, i: number) => (
           <Grid key={i} item>
             <Link className={classes.link} to={project.node.slug || '/'}>
