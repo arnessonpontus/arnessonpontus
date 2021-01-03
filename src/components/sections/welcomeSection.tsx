@@ -7,6 +7,7 @@ import { Typography } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 
 import Bubble from '../bubble';
+import ContactContainer from '../contactContainer';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -38,17 +39,16 @@ const WelcomeSection: React.FC = () => {
         </Bubble>
       </Grid>
       <Grid item xs={12}>
-        <Typography variant="h3">Hi people</Typography>
-        <Typography variant="body1">Welcome to your new Gatsby site</Typography>
+        <Typography variant="h3">Welcome</Typography>
       </Grid>
 
       <Grid item xs={12}>
         <Typography variant="body1">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam numquam
-          aspernatur impedit unde quo ipsum repellendus vitae non libero nisi
-          mollitia neque quia, quidem cum debitis animi amet natus! Atque?
+          Hi and welcome to my website! Here you can read more about me, find my
+          contact information and see preivous project.
         </Typography>
       </Grid>
+      <ContactContainer />
     </Grid>
   );
 };
