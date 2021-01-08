@@ -1,7 +1,9 @@
 import * as React from 'react';
-import { Link } from 'gatsby';
+import { useStaticQuery, graphql } from 'gatsby';
 import Image from '../image';
 import { Theme } from '@material-ui/core/styles';
+
+import Img from 'gatsby-image';
 
 import Grid from '@material-ui/core/Grid';
 
@@ -32,6 +34,18 @@ const useStyles = makeStyles((theme: Theme) => ({
 const AboutMeSection: React.FC = () => {
   const classes = useStyles();
 
+  const data = useStaticQuery(graphql`
+    query {
+      placeholderImage: file(relativePath: { eq: "magnifying_glass.png" }) {
+        childImageSharp {
+          fluid(maxWidth: 300) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
+    }
+  `);
+
   return (
     <>
       <Grid
@@ -45,7 +59,7 @@ const AboutMeSection: React.FC = () => {
       >
         <Grid item className={classes.imageWrapper}>
           <div className={classes.image}>
-            <Image />
+            <Img fluid={data.placeholderImage.childImageSharp.fluid} />
           </div>
         </Grid>
         <Grid item xs={12}>

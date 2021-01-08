@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Theme } from '@material-ui/core/styles';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography } from '@material-ui/core';
+import { Typography, Box } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Bubble from '../bubble';
 import Img, { FluidObject } from 'gatsby-image';
@@ -89,12 +89,16 @@ const ProjectsSection: React.FC = () => {
                   alt={project.node.title!}
                 />
               </Bubble>
-              <p>{project.node.title}</p>
+              <Typography variant="subtitle1">
+                <Box fontWeight="fontWeightBold" m={1}>
+                  {project.node.title}
+                </Box>
+              </Typography>
             </Link>
           </Grid>
         ))}
       </Grid>
-      <p> See more projects here... </p>
+      <Typography> See more projects here... </Typography>
     </Grid>
   );
 };

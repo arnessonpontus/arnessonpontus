@@ -1,9 +1,10 @@
 import * as React from 'react';
-import Image from '../image';
+import { useStaticQuery, graphql } from 'gatsby';
+import Img from 'gatsby-image';
 
 import { Theme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography } from '@material-ui/core';
+import { Typography, Link } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 
 import Bubble from '../bubble';
@@ -23,6 +24,18 @@ const WelcomeSection: React.FC = () => {
     console.log('welcome section');
   }
 
+  const data = useStaticQuery(graphql`
+    query {
+      placeholderImage: file(relativePath: { eq: "me.jpg" }) {
+        childImageSharp {
+          fluid(maxWidth: 1000) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
+    }
+  `);
+
   return (
     <Grid
       container
@@ -35,7 +48,13 @@ const WelcomeSection: React.FC = () => {
     >
       <Grid item>
         <Bubble width={250} height={250} onClicked={handleOnClick}>
-          <Image />
+          <Link
+            href={data.placeholderImage.childImageSharp.fluid.src}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Img fluid={data.placeholderImage.childImageSharp.fluid} />
+          </Link>
         </Bubble>
       </Grid>
       <Grid item xs={12}>
@@ -45,7 +64,7 @@ const WelcomeSection: React.FC = () => {
       <Grid item xs={12}>
         <Typography variant="body1">
           Hi and welcome to my website! Here you can read more about me, find my
-          contact information and see preivous project.
+          contact information and see preivous project
         </Typography>
       </Grid>
       <ContactContainer />
