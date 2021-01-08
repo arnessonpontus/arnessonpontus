@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
-import Image from '../image';
 import { Theme } from '@material-ui/core/styles';
 
 import Img from 'gatsby-image';
@@ -8,7 +7,7 @@ import Img from 'gatsby-image';
 import Grid from '@material-ui/core/Grid';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography, List, ListItem } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
