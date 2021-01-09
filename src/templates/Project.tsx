@@ -1,6 +1,9 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import Img, { FixedObject, FluidObject } from 'gatsby-image';
+import Img, { FluidObject } from 'gatsby-image';
+
+import GitHubIcon from '@material-ui/icons/GitHub';
+import DescriptionIcon from '@material-ui/icons/Description';
 
 import Layout from '../components/layout';
 import SEO from '../components/seo';
@@ -16,11 +19,16 @@ import FaceIcon from '@material-ui/icons/Face';
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     background: '#0F2635',
+    paddingBottom: '5vh',
+    minHeight: '90vh',
+  },
+  heroWrapper: {
+    width: '100%',
+    marginBottom: '5vh',
+  },
+  about: {
     paddingLeft: '10vw',
     paddingRight: '10vw',
-    paddingBottom: '5vh',
-    paddingTop: '5vh',
-    minHeight: '90vh',
   },
   link: {
     color: `white`,
@@ -50,22 +58,12 @@ const useStyles = makeStyles((theme: Theme) => ({
 interface Props {
   data: {
     contentfulProjectItem: ContentfulProjectItem;
-    githubLogo: ChildImage;
-    reportLogo: ChildImage;
   };
 }
-
-type ChildImage = {
-  childImageSharp: {
-    fixed: FixedObject;
-  };
-};
 
 const ProjectTemplate = (props: Props) => {
   const classes = useStyles();
   const project = props.data.contentfulProjectItem;
-  const ghLogo = props.data.githubLogo;
-  const reportLogo = props.data.reportLogo;
 
   return (
     <Layout>
@@ -77,11 +75,31 @@ const ProjectTemplate = (props: Props) => {
       >
         <SEO title={'title'} />
         <Grid item>
-          <Box textAlign="center" fontStyle="italic">
+          <Box
+            textAlign="center"
+            fontStyle="italic"
+            height="30vh"
+            display="flex"
+            justifyContent="center"
+            flexDirection="column"
+          >
             <Typography variant="h3">{project.title}</Typography>
 
             <Typography variant="h6">{project.subTitle}</Typography>
           </Box>
+        </Grid>
+        <Grid item className={classes.heroWrapper}>
+          <Img
+            style={{ maxHeight: '60vh' }}
+            fluid={project.thumbnail?.fluid as FluidObject}
+            alt={project.title!}
+          />
+        </Grid>
+        <Grid item className={classes.about}>
+          <ContentfulRichText
+            document={project.description?.json}
+            key={`${project.id}-content`}
+          />
         </Grid>
         <Carousel
           interval={6000}
@@ -102,11 +120,13 @@ const ProjectTemplate = (props: Props) => {
             </Grid>
           ))}
         </Carousel>
-        <ContentfulRichText
-          document={project.description?.json}
-          key={`${project.id}-content`}
-        />
-        <Grid alignItems="center" justify="space-between" item container>
+        <Grid
+          className={classes.about}
+          alignItems="center"
+          justify="space-between"
+          item
+          container
+        >
           <Grid item>
             {project.keywords?.map((keyword, i) => (
               <Chip
@@ -125,7 +145,7 @@ const ProjectTemplate = (props: Props) => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Img fixed={reportLogo.childImageSharp?.fixed} />
+                <DescriptionIcon fontSize="large" />
                 <Box marginLeft={2}>Report</Box>
               </Link>
             ) : null}
@@ -136,7 +156,7 @@ const ProjectTemplate = (props: Props) => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Img fixed={ghLogo.childImageSharp?.fixed} />
+                <GitHubIcon fontSize="large" />
                 <Box marginLeft={2}>Find on Github</Box>
               </Link>
             ) : null}
@@ -150,21 +170,7 @@ const ProjectTemplate = (props: Props) => {
 export default ProjectTemplate;
 
 export const pageQuery = graphql`
-  query IconsAndProjectBySlug($slug: String!) {
-    githubLogo: file(relativePath: { eq: "logos/github-logo-white.png" }) {
-      childImageSharp {
-        fixed(width: 35, height: 35) {
-          ...GatsbyImageSharpFixed
-        }
-      }
-    }
-    reportLogo: file(relativePath: { eq: "logos/report-logo-white.png" }) {
-      childImageSharp {
-        fixed(width: 35, height: 35) {
-          ...GatsbyImageSharpFixed
-        }
-      }
-    }
+  query ProjectBySlug($slug: String!) {
     site {
       siteMetadata {
         title
@@ -185,6 +191,13 @@ export const pageQuery = graphql`
       keywords
       description {
         json
+      }
+      thumbnail {
+        title
+        description
+        fluid(maxWidth: 4000) {
+          ...GatsbyContentfulFluid
+        }
       }
       images {
         fluid(maxWidth: 750) {
