@@ -14,7 +14,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Theme } from '@material-ui/core/styles';
 import { Typography, Grid, Box, Chip, Link } from '@material-ui/core';
 import Carousel from 'react-material-ui-carousel';
-import FaceIcon from '@material-ui/icons/Face';
+import Bubble from '../components/bubble';
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -22,9 +23,21 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingBottom: '5vh',
     minHeight: '90vh',
   },
+  titleContainer: {
+    textAlign: 'center',
+    fontStyle: 'italic',
+    height: '30vh',
+    display: 'flex',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    padding: '0 50px',
+  },
   heroWrapper: {
     width: '100%',
     marginBottom: '5vh',
+  },
+  hero: {
+    maxHeight: '60vh',
   },
   about: {
     paddingLeft: '10vw',
@@ -39,15 +52,44 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginBottom: '10px',
   },
   carousel: {
-    marginTop: '5vh',
     marginBottom: '5vh',
   },
+  videoWrapper: {
+    position: 'relative',
+    overflow: 'hidden',
+    width: '80%',
+    paddingBottom: '45.2%',
+    marginBottom: '5vh',
+  },
+  video: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    width: '100%',
+    height: '100%',
+  },
   imageWrapper: {
-    maxHeight: '50vh',
     width: '80vw',
     [theme.breakpoints.up('md')]: {
-      width: '50vw',
+      width: '65vw',
     },
+  },
+  demoButton: {
+    backgroundColor: 'white',
+    color: 'black',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100%',
+    width: '100%',
+    opacity: 0.8,
+    textDecoration: 'none',
+  },
+  bottomItem: {
+    marginBottom: '4vh',
   },
   keyword: {
     marginRight: 10,
@@ -75,14 +117,7 @@ const ProjectTemplate = (props: Props) => {
       >
         <SEO title={'title'} />
         <Grid item>
-          <Box
-            textAlign="center"
-            fontStyle="italic"
-            height="30vh"
-            display="flex"
-            justifyContent="center"
-            flexDirection="column"
-          >
+          <Box className={classes.titleContainer}>
             <Typography variant="h3">{project.title}</Typography>
 
             <Typography variant="h6">{project.subTitle}</Typography>
@@ -90,11 +125,23 @@ const ProjectTemplate = (props: Props) => {
         </Grid>
         <Grid item className={classes.heroWrapper}>
           <Img
-            style={{ maxHeight: '60vh' }}
-            fluid={project.thumbnail?.fluid as FluidObject}
+            className={classes.hero}
+            fluid={project.hero?.fluid as FluidObject}
             alt={project.title!}
           />
         </Grid>
+        {project.videoLink ? (
+          <Grid item className={classes.videoWrapper}>
+            <iframe
+              className={classes.video}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              frameBorder="0"
+              src={project.videoLink}
+              title="video"
+              scrolling="no"
+            ></iframe>
+          </Grid>
+        ) : null}
         <Grid item className={classes.about}>
           <ContentfulRichText
             document={project.description?.json}
@@ -102,11 +149,11 @@ const ProjectTemplate = (props: Props) => {
           />
         </Grid>
         <Carousel
+          autoPlay={true}
           interval={6000}
           animation="slide"
           className={classes.carousel}
-          navButtonsAlwaysVisible
-          indicators={false}
+          indicators={true}
         >
           {project.images?.map((img, i) => (
             <Grid item key={i} className={classes.imageWrapper}>
@@ -115,11 +162,36 @@ const ProjectTemplate = (props: Props) => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Img fluid={img?.fluid as FluidObject} alt={project.title!} />
+                <Img
+                  fluid={{
+                    ...(img?.fluid as FluidObject),
+                    aspectRatio: 16 / 9,
+                  }}
+                  imgStyle={{
+                    backgroundColor: '#f5f5f5',
+                    objectFit: 'contain',
+                  }}
+                  alt={project.title!}
+                />
               </Link>
             </Grid>
           ))}
         </Carousel>
+        {project.demo ? (
+          <Grid item className={classes.bottomItem}>
+            <Bubble size={80}>
+              <Link
+                className={classes.demoButton}
+                href={project.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span>DEMO</span>
+                <PlayArrowIcon />
+              </Link>
+            </Bubble>
+          </Grid>
+        ) : null}
         <Grid
           className={classes.about}
           alignItems="center"
@@ -129,15 +201,11 @@ const ProjectTemplate = (props: Props) => {
         >
           <Grid item>
             {project.keywords?.map((keyword, i) => (
-              <Chip
-                key={i}
-                className={classes.keyword}
-                icon={<FaceIcon />}
-                label={keyword}
-              />
+              <Chip key={i} className={classes.keyword} label={keyword} />
             ))}
           </Grid>
-          <Grid item>
+
+          <Grid item className={classes.bottomItem}>
             {project.report ? (
               <Link
                 className={classes.link}
@@ -188,11 +256,12 @@ export const pageQuery = graphql`
           url
         }
       }
+      demo
       keywords
       description {
         json
       }
-      thumbnail {
+      hero {
         title
         description
         fluid(maxWidth: 4000) {

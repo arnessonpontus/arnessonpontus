@@ -4,23 +4,22 @@ import { Grid } from '@material-ui/core';
 
 type Props = {
   children: React.ReactNode;
-  width: number;
-  height: number;
-  onClicked: () => void;
+  size: number;
+  onClicked?: () => void;
 };
 
 const useStyles = makeStyles({
   bubbleBorder: (props: Props) => ({
-    width: props.width,
-    height: props.height,
+    width: props.size,
+    height: props.size,
     borderWidth: '4px',
     borderColor: 'white',
     borderStyle: 'solid',
     borderRadius: '50%',
   }),
   contentWrapper: (props: Props) => ({
-    width: props.width * 0.9 - 6, // subtract Line width
-    height: props.height * 0.9 - 6,
+    width: props.size * 0.9 - 6, // subtract Line width
+    height: props.size * 0.9 - 6,
     borderRadius: '50%',
     transition: 'transform 0.2s ease-in-out',
     cursor: 'pointer',
@@ -30,6 +29,8 @@ const useStyles = makeStyles({
   }),
   bubble: {
     borderRadius: '50%',
+    width: '100%',
+    height: '100%',
     overflow: 'hidden',
   },
 });

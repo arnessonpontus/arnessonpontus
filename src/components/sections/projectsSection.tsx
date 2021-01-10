@@ -29,10 +29,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 const ProjectsSection: React.FC = () => {
   const classes = useStyles();
 
-  function handleOnClick(text: string) {
-    console.log('project ' + text);
-  }
-
   const projects = useStaticQuery(graphql`
     query ProjectSectionQuery {
       allContentfulProjectItem(limit: 10) {
@@ -76,11 +72,7 @@ const ProjectsSection: React.FC = () => {
         {projects.map((project: Project, i: number) => (
           <Grid key={i} item>
             <Link className={classes.link} to={project.node.slug || '/'}>
-              <Bubble
-                onClicked={() => handleOnClick(i.toString())}
-                width={200}
-                height={200}
-              >
+              <Bubble size={200}>
                 <Img
                   fluid={{
                     ...(project.node.thumbnail?.fluid as FluidObject),

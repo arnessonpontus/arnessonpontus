@@ -20,10 +20,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 const WelcomeSection: React.FC = () => {
   const classes = useStyles();
 
-  function handleOnClick() {
-    console.log('welcome section');
-  }
-
   const data = useStaticQuery(graphql`
     query {
       placeholderImage: file(relativePath: { eq: "me.jpg" }) {
@@ -47,7 +43,7 @@ const WelcomeSection: React.FC = () => {
       direction="column"
     >
       <Grid item>
-        <Bubble width={250} height={250} onClicked={handleOnClick}>
+        <Bubble size={250}>
           <Link
             href={data.placeholderImage.childImageSharp.fluid.src}
             target="_blank"
