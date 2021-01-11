@@ -7,6 +7,7 @@ module.exports = {
     author: `Pontus Arnesson`,
   },
   plugins: [
+    `gatsby-plugin-material-ui`,
     `gatsby-plugin-typescript`,
     `gatsby-plugin-react-helmet`,
     {
