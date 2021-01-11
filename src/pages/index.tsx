@@ -22,14 +22,12 @@ const IndexPage: React.FC = () => {
   const classes = useStyles();
 
   return (
-    <Layout>
-      <div className={classes.root}>
-        <SEO title="Home" />
-        <WelcomeSection />
-        <AboutMeSection />
-        <ProjectsSection />
-      </div>
-    </Layout>
+    <div className={classes.root}>
+      <SEO title="Home" />
+      <WelcomeSection />
+      <AboutMeSection />
+      <ProjectsSection />
+    </div>
   );
 };
 

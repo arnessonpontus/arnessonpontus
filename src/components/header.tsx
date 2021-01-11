@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    background: '#0D4560',
+    background: theme.palette.primary.main,
   },
   toolbar: {
     minHeight: '10vh',
