@@ -38,7 +38,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: 350,
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-between',
     transition: '0.3s',
     alignItems: 'center',
     '&:hover': {
@@ -49,7 +48,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     maxWidth: '100%',
     display: '-webkit-box',
     WebkitBoxOrient: 'vertical',
-    WebkitLineClamp: 2,
+    WebkitLineClamp: 3,
     overflow: 'hidden',
     textOverflow: 'ellipsis',
   },
@@ -112,25 +111,23 @@ const ProjectsSection: React.FC = () => {
                     alt={project.node.title!}
                   />
                 </Bubble>
-                <div>
-                  <Box
-                    component="h3"
-                    style={{ wordWrap: 'break-word' }}
-                    fontWeight="fontWeightBold"
-                    m={1}
-                  >
-                    {project.node.title}
-                  </Box>
-
-                  <Box
-                    fontWeight="fontWeighItalic"
-                    fontSize={12}
-                    m={1}
-                    className={classes.subtitleContainer}
-                  >
-                    {project.node.subTitle}
-                  </Box>
-                </div>
+                <Box
+                  component="h3"
+                  height={40}
+                  style={{ wordWrap: 'break-word' }}
+                  fontWeight="fontWeightBold"
+                  my={2}
+                >
+                  {project.node.title}
+                </Box>
+                <Box
+                  fontWeight="fontWeighItalic"
+                  fontSize={12}
+                  m={1}
+                  className={classes.subtitleContainer}
+                >
+                  {project.node.subTitle}
+                </Box>
               </Card>
             </Link>
           </Grid>
