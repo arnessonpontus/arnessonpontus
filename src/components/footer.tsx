@@ -4,7 +4,7 @@ import { Typography, Grid } from '@material-ui/core';
 import MailIcon from '@material-ui/icons/Mail';
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: '#03141c',
     width: '100vw',
     height: '20vh',
   },

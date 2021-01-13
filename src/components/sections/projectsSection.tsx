@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Theme } from '@material-ui/core/styles';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Box } from '@material-ui/core';
+import { Typography, Box, Card } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Bubble from '../bubble';
 import Img, { FluidObject } from 'gatsby-image';
@@ -27,6 +27,32 @@ const useStyles = makeStyles((theme: Theme) => ({
   sectionTitle: {
     marginBottom: '5vh',
   },
+  projectCard: {
+    paddingTop: '10px',
+    backgroundColor: '#0D4560',
+
+    [theme.breakpoints.up('sm')]: {
+      width: 220,
+    },
+    width: '70vw',
+    height: 350,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    transition: '0.3s',
+    alignItems: 'center',
+    '&:hover': {
+      backgroundColor: '#11597d',
+    },
+  },
+  subtitleContainer: {
+    maxWidth: '100%',
+    display: '-webkit-box',
+    WebkitBoxOrient: 'vertical',
+    WebkitLineClamp: 2,
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+  },
 }));
 
 const ProjectsSection: React.FC = () => {
@@ -41,6 +67,7 @@ const ProjectsSection: React.FC = () => {
             title
             updatedAt
             slug
+            subTitle
             thumbnail {
               title
               description
@@ -75,26 +102,42 @@ const ProjectsSection: React.FC = () => {
         {projects.map((project: Project, i: number) => (
           <Grid key={i} item>
             <Link className={classes.link} to={project.node.slug || '/'}>
-              <Bubble size={200}>
-                <Img
-                  fluid={{
-                    ...(project.node.thumbnail?.fluid as FluidObject),
-                    aspectRatio: 1 / 1,
-                  }}
-                  alt={project.node.title!}
-                />
-              </Bubble>
-              <Typography variant="subtitle1">
-                <Box fontWeight="fontWeightBold" m={1}>
-                  {project.node.title}
-                </Box>
-              </Typography>
+              <Card raised elevation={10} className={classes.projectCard}>
+                <Bubble size={200}>
+                  <Img
+                    fluid={{
+                      ...(project.node.thumbnail?.fluid as FluidObject),
+                      aspectRatio: 1 / 1,
+                    }}
+                    alt={project.node.title!}
+                  />
+                </Bubble>
+                <div>
+                  <Box
+                    component="h3"
+                    style={{ wordWrap: 'break-word' }}
+                    fontWeight="fontWeightBold"
+                    m={1}
+                  >
+                    {project.node.title}
+                  </Box>
+
+                  <Box
+                    fontWeight="fontWeighItalic"
+                    fontSize={12}
+                    m={1}
+                    className={classes.subtitleContainer}
+                  >
+                    {project.node.subTitle}
+                  </Box>
+                </div>
+              </Card>
             </Link>
           </Grid>
         ))}
       </Grid>
       <Grid item>
-        <Typography> See more projects here... </Typography>
+        <Typography variant="subtitle2"> See more projects here... </Typography>
       </Grid>
     </Grid>
   );
