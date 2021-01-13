@@ -14,6 +14,7 @@ import './layout.css';
 
 import { ThemeProvider } from '@material-ui/core/styles';
 import { theme } from '../theme';
+import Footer from './footer';
 
 type Props = {
   children: React.ReactNode;
@@ -42,6 +43,7 @@ const Layout: React.FC<Props> = ({ children }: Props) => {
         >
           <main>{children}</main>
         </div>
+        <Footer></Footer>
       </ThemeProvider>
     </>
   );

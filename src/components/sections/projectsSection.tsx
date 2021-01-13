@@ -18,11 +18,14 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     minHeight: '90vh',
     textAlign: 'center',
-    marginTop: '10vh',
+    paddingBottom: '5vh',
   },
   link: {
     color: `white`,
     textDecoration: `none`,
+  },
+  sectionTitle: {
+    marginBottom: '5vh',
   },
 }));
 
@@ -58,8 +61,8 @@ const ProjectsSection: React.FC = () => {
     <Grid
       container
       className={classes.root}
-      spacing={6}
       id="projects"
+      spacing={2}
       justify="center"
       alignItems="center"
       direction="column"
@@ -68,7 +71,7 @@ const ProjectsSection: React.FC = () => {
         <Typography variant="h3">Projects</Typography>
       </Grid>
 
-      <Grid container item xs={12} justify="center" spacing={2}>
+      <Grid item container xs={12} justify="center" spacing={2}>
         {projects.map((project: Project, i: number) => (
           <Grid key={i} item>
             <Link className={classes.link} to={project.node.slug || '/'}>
@@ -90,7 +93,9 @@ const ProjectsSection: React.FC = () => {
           </Grid>
         ))}
       </Grid>
-      <Typography> See more projects here... </Typography>
+      <Grid item>
+        <Typography> See more projects here... </Typography>
+      </Grid>
     </Grid>
   );
 };

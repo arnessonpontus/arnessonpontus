@@ -70,10 +70,15 @@ const AboutMeSection: React.FC = () => {
             I am currently studying my last year at M.Sc. in Media Technology at
             Linköping University. I am interested in several different areas
             including Machine Learning, Computer vision, Computer graphics, Web,
-            Mobile Applications etc. I like to live an active lifestyle and move
-            my body including playing sports, going to the gym and running in
-            the nature. I also enjoy hobby programming projects, spending time
-            with friends and family or just relaxing with a series of film.
+            Mobile Applications etc. I like to live an active lifestyle by for
+            example playing sports, going to the gym or having a run in the
+            nature. I also enjoy hobby programming projects, spending time with
+            friends and family or just relaxing with a tv series or film.
+          </Typography>
+          <br />
+          <Typography variant="body1">
+            If you want to contact me of any reason, don't hesitate to send me
+            an email or contact me in any other way.{' '}
           </Typography>
         </Grid>
       </Grid>

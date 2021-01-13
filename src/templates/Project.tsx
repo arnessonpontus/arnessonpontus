@@ -25,11 +25,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   titleContainer: {
     textAlign: 'center',
     fontStyle: 'italic',
-    height: '30vh',
+    minHeight: '30vh',
     display: 'flex',
     justifyContent: 'center',
     flexDirection: 'column',
-    padding: '0 50px',
+    padding: '0 20px',
   },
   heroWrapper: {
     width: '100%',

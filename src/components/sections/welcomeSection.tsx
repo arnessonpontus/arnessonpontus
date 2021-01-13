@@ -60,7 +60,7 @@ const WelcomeSection: React.FC = () => {
       <Grid item xs={12}>
         <Typography variant="body1">
           Hi and welcome to my website! Here you can read more about me, find my
-          contact information and see preivous project
+          contact information and see preivous projects.
         </Typography>
       </Grid>
       <ContactContainer />
