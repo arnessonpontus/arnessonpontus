@@ -14,6 +14,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     minHeight: '90vh',
     textAlign: 'center',
     marginTop: '10vh',
+    [theme.breakpoints.down('xs')]: {
+      marginBottom: '10vh',
+    },
   },
   imageWrapper: {
     width: `250px`,

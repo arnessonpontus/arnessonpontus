@@ -12,6 +12,10 @@ import ContactContainer from '../contactContainer';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
+    [theme.breakpoints.up('xs')]: {
+      paddingTop: '5vh',
+      paddingBottom: '5vh',
+    },
     minHeight: '90vh',
     textAlign: 'center',
   },
