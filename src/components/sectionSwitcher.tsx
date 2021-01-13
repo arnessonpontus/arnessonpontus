@@ -38,21 +38,23 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
+let prevWinScroll: number = 0;
+
 const SectionSwitcher = () => {
   const classes = useStyles();
+  const height: number =
+    document.documentElement.scrollHeight -
+    document.documentElement.clientHeight;
 
   const [currentActive, setCurrentActive] = React.useState(0);
 
   const scrollHandeler = () => {
     const winScroll: number = window.pageYOffset;
 
-    const height: number =
-      document.documentElement.scrollHeight -
-      document.documentElement.clientHeight;
+    if (prevWinScroll == winScroll) return;
+    prevWinScroll = winScroll;
 
     const scrolled: number = winScroll / height;
-
-    console.log(scrolled);
 
     if (scrolled < 0.33) {
       handleActiveChange(0);
@@ -64,21 +66,11 @@ const SectionSwitcher = () => {
   };
 
   useEffect(() => {
-    document.addEventListener('wheel', throttle(scrollHandeler, 200));
+    const interval = setInterval(() => {
+      scrollHandeler();
+    }, 400);
+    return () => clearInterval(interval);
   }, []);
-
-  function throttle(func: Function, limit: number) {
-    let inThrottle: boolean;
-    return function (this: any) {
-      const args = arguments;
-      const context = this;
-      if (!inThrottle) {
-        func.apply(context, args);
-        inThrottle = true;
-        setTimeout(() => (inThrottle = false), limit);
-      }
-    };
-  }
 
   function handleActiveChange(i: number) {
     setCurrentActive(i);
