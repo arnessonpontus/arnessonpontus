@@ -101,6 +101,7 @@ const Header = ({ siteTitle }: Props) => {
       <CssBaseline />
       <AppBar
         position="fixed"
+        id="appbar"
         elevation={2}
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,

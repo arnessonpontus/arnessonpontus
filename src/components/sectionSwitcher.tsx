@@ -42,9 +42,6 @@ let prevWinScroll: number = 0;
 
 const SectionSwitcher = () => {
   const classes = useStyles();
-  const height: number =
-    document.documentElement.scrollHeight -
-    document.documentElement.clientHeight;
 
   const [currentActive, setCurrentActive] = React.useState(0);
 
@@ -54,14 +51,37 @@ const SectionSwitcher = () => {
     if (prevWinScroll == winScroll) return;
     prevWinScroll = winScroll;
 
-    const scrolled: number = winScroll / height;
+    const welcomeSection: HTMLElement | null = document.getElementById(
+      'welcome'
+    );
+    const aboutSection: HTMLElement | null = document.getElementById('about');
+    const appbar: HTMLElement | null = document.getElementById('appbar');
 
-    if (scrolled < 0.33) {
-      handleActiveChange(0);
-    } else if (scrolled > 0.33 && scrolled < 0.66) {
+    let welcomeHeight: number = 0;
+    let aboutHeight: number = 0;
+    let appBarHeight: number = 0;
+
+    if (welcomeSection) {
+      welcomeHeight = welcomeSection.offsetTop + welcomeSection.offsetHeight;
+    }
+
+    if (aboutSection) {
+      aboutHeight = aboutSection.offsetTop + aboutSection.offsetHeight;
+    }
+
+    if (appbar) {
+      appBarHeight = appbar.offsetTop + appbar.offsetHeight;
+    }
+
+    if (
+      winScroll > welcomeHeight - appBarHeight &&
+      winScroll < aboutHeight - appBarHeight
+    ) {
       handleActiveChange(1);
-    } else {
+    } else if (winScroll >= aboutHeight - appBarHeight) {
       handleActiveChange(2);
+    } else {
+      handleActiveChange(0);
     }
   };
 
