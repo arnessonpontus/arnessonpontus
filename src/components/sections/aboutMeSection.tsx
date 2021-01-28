@@ -23,6 +23,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   image: {
     borderRadius: '50%',
     overflow: 'hidden',
+    borderColor: "white",
+    borderStyle: "solid",
+    borderWidth: "5px"
   },
   link: {
     textDecoration: 'none',
@@ -36,7 +39,7 @@ const AboutMeSection: React.FC = () => {
 
   const data = useStaticQuery(graphql`
     query {
-      placeholderImage: file(relativePath: { eq: "magnifying_glass.png" }) {
+      placeholderImage: file(relativePath: { eq: "snorkling.jpg" }) {
         childImageSharp {
           fluid(maxWidth: 300) {
             ...GatsbyImageSharpFluid
