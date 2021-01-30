@@ -22,6 +22,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import HomeIcon from '@material-ui/icons/Home';
 import ListIcon from '@material-ui/icons/ViewList';
 import InfoIcon from '@material-ui/icons/Info';
+import { Hidden } from '@material-ui/core';
 
 const drawerWidth = 240;
 
@@ -113,6 +114,7 @@ const Header = ({ siteTitle }: Props) => {
               {siteTitle}
             </Typography>
           </Link>
+          <Hidden lgUp>
           <IconButton
             color="inherit"
             aria-label="Open drawer"
@@ -122,6 +124,7 @@ const Header = ({ siteTitle }: Props) => {
           >
             <MenuIcon className={classes.menuIcon} />
           </IconButton>
+          </Hidden>
         </Toolbar>
       </AppBar>
       <Drawer

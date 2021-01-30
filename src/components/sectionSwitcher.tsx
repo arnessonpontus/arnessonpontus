@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AnchorLink } from 'gatsby-plugin-anchor-links';
 import { makeStyles, Theme, Typography } from '@material-ui/core';
 import clsx from 'clsx';
@@ -22,34 +22,31 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignItems: 'center',
     transition: 'transform 0.2s ease-in-out',
     '&:hover': {
-      transform: `scale3d(1.05, 1.05, 1)`,
+      transform: `scale3d(1.1, 1.1, 1)`,
       opacity: 1.0,
     },
   },
   activated: {
     opacity: 1.0,
-    transform: `scale3d(1.05, 1.05, 1)`,
+    transform: `scale3d(1.1, 1.1, 1)`,
   },
   link: {
     textDecoration: 'none',
   },
   circle: {
-    opacity: 0.5,
+    opacity: 1.0,
   },
 }));
 
-let prevWinScroll: number = 0;
+let ticking = false;
 
 const SectionSwitcher = () => {
   const classes = useStyles();
 
-  const [currentActive, setCurrentActive] = React.useState(0);
+  const [currentActive, setCurrentActive] = useState(0);
 
   const scrollHandeler = () => {
     const winScroll: number = window.pageYOffset;
-
-    if (prevWinScroll == winScroll) return;
-    prevWinScroll = winScroll;
 
     const welcomeSection: HTMLElement | null = document.getElementById(
       'welcome'
@@ -77,24 +74,33 @@ const SectionSwitcher = () => {
       winScroll > welcomeHeight - appBarHeight &&
       winScroll < aboutHeight - appBarHeight
     ) {
-      handleActiveChange(1);
+      setCurrentActive(1);
     } else if (winScroll >= aboutHeight - appBarHeight) {
-      handleActiveChange(2);
+      setCurrentActive(2);
     } else {
-      handleActiveChange(0);
+      setCurrentActive(0);
     }
   };
 
+  function scrolled() {
+    if (!ticking) {
+      window.requestAnimationFrame(function() {
+        scrollHandeler();
+        ticking = false;
+      });
+  
+      ticking = true;
+    }
+  }
+
   useEffect(() => {
-    const interval = setInterval(() => {
-      scrollHandeler();
-    }, 400);
-    return () => clearInterval(interval);
+    scrollHandeler();
+    window.addEventListener('scroll', scrolled, false);
+
+    return () => window.removeEventListener('scroll', scrolled, false);
   }, []);
 
-  function handleActiveChange(i: number) {
-    setCurrentActive(i);
-  }
+  
 
   return (
     <div className={classes.sections}>
@@ -102,7 +108,7 @@ const SectionSwitcher = () => {
         to="/#welcome"
         className={classes.link}
         onAnchorLinkClick={() => {
-          handleActiveChange(0);
+          setCurrentActive(0);
         }}
       >
         <div
@@ -127,7 +133,7 @@ const SectionSwitcher = () => {
         to="/#about"
         className={classes.link}
         onAnchorLinkClick={() => {
-          handleActiveChange(1);
+          setCurrentActive(1);
         }}
       >
         <div
@@ -152,7 +158,7 @@ const SectionSwitcher = () => {
         to="/#projects"
         className={classes.link}
         onAnchorLinkClick={() => {
-          handleActiveChange(2);
+          setCurrentActive(2);
         }}
       >
         <div
