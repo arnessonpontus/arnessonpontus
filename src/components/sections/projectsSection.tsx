@@ -59,7 +59,7 @@ const ProjectsSection: React.FC = () => {
 
   const projects = useStaticQuery(graphql`
     query ProjectSectionQuery {
-      allContentfulProjectItem(limit: 10) {
+      allContentfulProjectItem(limit: 100) {
         edges {
           node {
             id
@@ -132,9 +132,6 @@ const ProjectsSection: React.FC = () => {
             </Link>
           </Grid>
         ))}
-      </Grid>
-      <Grid item>
-        <Typography variant="subtitle2"> See more projects here... </Typography>
       </Grid>
     </Grid>
   );

@@ -81,7 +81,7 @@ const AboutMeSection: React.FC = () => {
           </Typography>
           <br />
           <Typography variant="body1">
-            If you want to contact me of any reason, don't hesitate to send me
+            If you want to contact me for any reason, don't hesitate to send me
             an email or contact me in any other way.{' '}
           </Typography>
         </Grid>

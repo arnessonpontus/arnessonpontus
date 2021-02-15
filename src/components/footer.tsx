@@ -21,7 +21,7 @@ const Footer = () => {
       direction="column"
       className={classes.root}
     >
-      <Grid item container spacing={1} direction="row" justify="center">
+      <Grid item container direction="row" justify="center" spacing={1}>
         <Grid item>
           <MailIcon />
         </Grid>
