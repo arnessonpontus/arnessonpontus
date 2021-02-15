@@ -68,6 +68,11 @@ const ContactContainer: React.FC = () => {
           }
         }
       }
+      CV: file(name: { eq: "CV_2021" }) {
+        name
+        extension
+        publicURL
+      }
     }
   `);
 
@@ -117,7 +122,7 @@ const ContactContainer: React.FC = () => {
       </Grid>
       <Grid item className={classes.iconWrapper}>
         <a
-          href="files/CV_2019_Pontus.pdf"
+          href={data.CV.publicURL}
           target="_blank"
           rel="noopener noreferrer"
         >
