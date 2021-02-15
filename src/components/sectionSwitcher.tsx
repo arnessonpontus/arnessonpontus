@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { AnchorLink } from 'gatsby-plugin-anchor-links';
 import { makeStyles, Theme, Typography } from '@material-ui/core';
+import { useScrollPosition } from '@n8tb1t/use-scroll-position'
 import clsx from 'clsx';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -22,13 +23,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignItems: 'center',
     transition: 'transform 0.2s ease-in-out',
     '&:hover': {
-      transform: `scale3d(1.1, 1.1, 1)`,
+      transform: `scale3d(1.05, 1.05, 1)`,
       opacity: 1.0,
     },
   },
   activated: {
     opacity: 1.0,
-    transform: `scale3d(1.1, 1.1, 1)`,
   },
   link: {
     textDecoration: 'none',
@@ -38,16 +38,16 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-let ticking = false;
-
 const SectionSwitcher = () => {
   const classes = useStyles();
 
   const [currentActive, setCurrentActive] = useState(0);
 
-  const scrollHandeler = () => {
-    const winScroll: number = window.pageYOffset;
+  useScrollPosition(({ currPos }) => {
+    scrollHandeler(-currPos.y);
+  })
 
+  const scrollHandeler = (winScroll: number) => {
     const welcomeSection: HTMLElement | null = document.getElementById(
       'welcome'
     );
@@ -81,26 +81,6 @@ const SectionSwitcher = () => {
       setCurrentActive(0);
     }
   };
-
-  function scrolled() {
-    if (!ticking) {
-      window.requestAnimationFrame(function() {
-        scrollHandeler();
-        ticking = false;
-      });
-  
-      ticking = true;
-    }
-  }
-
-  useEffect(() => {
-    scrollHandeler();
-    window.addEventListener('scroll', scrolled, false);
-
-    return () => window.removeEventListener('scroll', scrolled, false);
-  }, []);
-
-  
 
   return (
     <div className={classes.sections}>
