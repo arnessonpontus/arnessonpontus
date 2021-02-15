@@ -8,11 +8,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: '100vw',
     height: '20vh',
   },
+  email: {
+    width: "80%"
+  }
 }));
 
 const Footer = () => {
   const classes = useStyles();
-
   return (
     <Grid
       container
@@ -21,7 +23,7 @@ const Footer = () => {
       direction="column"
       className={classes.root}
     >
-      <Grid item container direction="row" justify="center" spacing={1}>
+      <Grid item container direction="row" justify="center" spacing={1} className={classes.email}>
         <Grid item>
           <MailIcon />
         </Grid>
